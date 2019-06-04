@@ -1,18 +1,18 @@
 const toArab = require('./convertToArabic');
 const toRom = require('./convertToRoman');
 
-module.exports.convertNumbers = (req, res ,next) => {
+module.exports.convertNumbers = async (req, res ,next) => {
     try {
         let result = null;
         const num = req.body.text;
         if(+/\d+/.exec(num)) {
-            result = toRom(num);
+            result = await toRom(num);
         } else {
-            result = toArab(num);
+            result = await toArab(num);
         }
         req.body.result = result;
     } catch (e) {
-        req.body.result = 'error';
+        next({err: "ERROR", status: "500"});
     }
     next();
 };

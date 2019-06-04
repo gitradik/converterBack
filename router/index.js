@@ -4,7 +4,7 @@ const router = express.Router();
 const conversation = require('./controllers/conversion');
 const {convertNumbers} = require('../utils/convertMiddleware');
 
-router.get('/', convertNumbers, conversation.getNumbers);
+router.post('/', convertNumbers, conversation.getNumbers);
 
 module.exports = router;
 
